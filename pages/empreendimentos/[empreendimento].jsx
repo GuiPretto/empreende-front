@@ -6,6 +6,7 @@ import PageHeader from '../../src/components/PageHeader'
 import { deletarRequest, prepararEditarRequest } from '../../src/store/modules/Empreendimento/action'
 import EmpreendimentoContent from '../../src/components/EmpreendimentoContent'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const Empreendimento = () => {
     const router = useRouter()
@@ -30,17 +31,16 @@ const Empreendimento = () => {
 
     return (
         <>
+            <Head>
+                <title>{empreendimentoAtual ? empreendimentoAtual.nome : "Empreendimento"}</title>
+                <meta property="og:title" content={empreendimentoAtual ? empreendimentoAtual.nome : "Empreendimento"} key="title" />
+            </Head>
             <PageHeader title={empreendimentoAtual?.nome}>
-                <Button type="button" size="large" variant="contained" color="primary">
-                    <Link
-                        href={{
-                            pathname: '/edicao',
-                            query: { id: empreendimentoAtual?.id },
-                          }}
-                    >
+                <Link href={{pathname: '/edicao', query: { id: empreendimentoAtual?.id }}}>
+                    <Button type="button" size="large" variant="contained" color="primary">
                         <a>Editar</a>
-                    </Link>
-                </Button>
+                    </Button>
+                </Link>
                 <Button onClick={() => setModalOpen(true)} type="button" size="large" variant="contained" color="primary">Excluir</Button>
                 <Dialog
                     open={modalOpen}
