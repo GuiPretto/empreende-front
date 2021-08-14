@@ -69,7 +69,7 @@ export const empreendimentoReducer = (state = initialState, action) => {
                 empreendimentoAtual: null
             }
         case EMPREENDIMENTOS_ERROR:
-            newNotification(action.error, {type: 'ERROR'})
+            newNotification(action.error.mensagem, {type: 'ERROR'})
             return {
                 ...state,
                 error: action.error

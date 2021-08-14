@@ -29,7 +29,7 @@ function* getAllEmpreendimentos({filters}) {
         yield put(finishLoading());
     } catch (e) {
         //ERROR
-        yield put(error(e.message));
+        yield put(error(e.response.data));
         yield put(finishLoading());
     }
 }
@@ -52,7 +52,7 @@ function* getEmpreendimento({slug, id}) {
         yield put(finishLoading());
     } catch (e) {
         //ERROR
-        yield put(error(e.message));
+        yield put(error(e.response.data));
         yield put(finishLoading());
     }
 }
@@ -70,7 +70,7 @@ function* saveEmpreendimento({data}) {
         yield put(finishLoading());
     } catch (e) {
         //ERROR
-        yield put(error(e.message));
+        yield put(error(e.response.data));
         yield put(finishLoading());
     }
 }
@@ -88,7 +88,7 @@ function* deleteEmpreendimento({id}) {
         yield put(finishLoading());
     } catch (e) {
         //ERROR
-        yield put(error(e.message));
+        yield put(error(e.response.data));
         yield put(finishLoading());
     }
 }
