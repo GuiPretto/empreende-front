@@ -11,8 +11,8 @@ import {
     EMPREENDIMENTOS_PREPARAR_NOVO_SUCCESS,
     EMPREENDIMENTOS_PREPARAR_NOVO_REQUEST, 
 } from "../actionTypes"
-import { slugify } from '../../../components/utils'
 import { newNotification } from "../../../components/Notification"
+import slugify from "slugify"
 
 const prepararNovoRequest = (id) => {
     return {
@@ -45,7 +45,7 @@ const salvarRequest = (data) => {
     const dataAjustada = {
         id: data?.id,
         nome: data.nome,
-        slug: slugify(data.nome),
+        slug: slugify(data.nome, {remove: /[*+~.()'"!:@]/g, lower: true}),
         contato: contato,
         quartos: data.quartos,
         vagas: data.vagas,
