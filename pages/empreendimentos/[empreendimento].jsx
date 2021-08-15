@@ -17,7 +17,7 @@ const Empreendimento = () => {
 
     useEffect(() => {
         empreendimento && dispatch(prepararEditarRequest(empreendimento, 'SLUG'))
-    }, [empreendimento])
+    }, [empreendimento, dispatch])
 
     const handleCloseModal = () => {
         setModalOpen(false)
@@ -36,7 +36,7 @@ const Empreendimento = () => {
                 <meta property="og:title" content={empreendimentoAtual ? empreendimentoAtual.nome : "Empreendimento"} key="title" />
             </Head>
             <PageHeader title={empreendimentoAtual?.nome}>
-                <Link href={{pathname: '/edicao', query: { id: empreendimentoAtual?.id }}}>
+                <Link passHref href={{pathname: '/edicao', query: { id: empreendimentoAtual?.id }}}>
                     <Button type="button" size="large" variant="contained" color="primary">
                         <a>Editar</a>
                     </Button>

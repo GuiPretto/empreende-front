@@ -12,7 +12,7 @@ const Cadastro = () => {
 
   useEffect(() => {
     dispatch(prepararNovoRequest())
-  }, [])
+  }, [dispatch])
 
   return (
     <>

@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(listRequest({nome: "", quartos: 0}))  
-  }, [])
+  }, [dispatch])
 
   return (
     <>

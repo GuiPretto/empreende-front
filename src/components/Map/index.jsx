@@ -32,19 +32,30 @@ const LocationMarker = ({ actualAdress }) => {
 
 const Map = ({ actualAdress }) => {
     const [coordinates, setCoordinates] = useState([-3.7275128502502852, -38.59116275])
+    const [isReady, setIsReady] = useState(false)
+
+    useEffect(() => {
+        setIsReady(true)
+    }, [])
+
+
     return (
-        <MapContainer
-            className="map"
-            center={actualAdress ? [actualAdress.latitude, actualAdress.longitude] : coordinates}
-            zoom={13}
-            scrollWheelZoom={false}
-        >
-            <TileLayer
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <LocationMarker actualAdress={actualAdress} />
-        </MapContainer>
+        <>
+            {isReady && (
+                <MapContainer
+                    className="map"
+                    center={actualAdress ? [actualAdress.latitude, actualAdress.longitude] : coordinates}
+                    zoom={13}
+                    scrollWheelZoom={false}
+                >
+                    <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <LocationMarker actualAdress={actualAdress} />
+                </MapContainer>
+            )}
+        </>
     )
 }
 

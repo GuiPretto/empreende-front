@@ -7,10 +7,11 @@ import { Paper, Typography, Tooltip } from "@material-ui/core"
 
 const EmpreendimentoContent = ({ empreendimento }) => {
     const Map = dynamic(
-        () => import('../Map'), // replace '@components/map' with your component's location
+        () => import('../Map'),
         {
+            // eslint-disable-next-line react/display-name
             loading: () => <p>A map is loading</p>,
-            ssr: false // This line is important. It's what prevents server-side render
+            ssr: false
         }
     )
 
@@ -52,5 +53,7 @@ const EmpreendimentoContent = ({ empreendimento }) => {
         </Wrapper>
     )
 }
+
+EmpreendimentoContent.displayName = "EmpreendimentoContent"
 
 export default EmpreendimentoContent

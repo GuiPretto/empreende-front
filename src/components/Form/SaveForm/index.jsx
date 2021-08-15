@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import { Button, Grid, useMediaQuery } from "@material-ui/core";
+import { Grid, useMediaQuery } from "@material-ui/core";
 import { Formik, Form, Field } from "formik"
 import { TextField } from "formik-material-ui";
 import * as Yup from 'yup';
@@ -9,26 +8,33 @@ import { Wrapper } from "./style";
 import { salvarRequest } from '../../../store/modules/Empreendimento/action';
 import MaskedInput from 'react-text-mask';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 const SaveForm = ({ setSubmitForm }) => {
     const dispatch = useDispatch();
     const mobile = useMediaQuery('(min-width:600px)');
-    const { loading } = useSelector(store => store.loadingReducer)
+    const [setValues, setSetValues] = useState(() => () => {})
     const { empreendimentoAtual } = useSelector(store => store.empreendimentoReducer)
 
+    useEffect(() => {
+        setValues({...initialValues, ...empreendimentoAtual})
+    }, [empreendimentoAtual])
+
     const MapInput = dynamic(
-        () => import('./MapInput'), // replace '@components/map' with your component's location
+        () => import('./MapInput'),
         {
+            // eslint-disable-next-line react/display-name
             loading: () => <p>A map is loading</p>,
-            ssr: false // This line is important. It's what prevents server-side render
+            ssr: false
         }
     )
 
     const Map = dynamic(
-        () => import('../../Map'), // replace '@components/map' with your component's location
+        () => import('../../Map'),
         {
+            // eslint-disable-next-line react/display-name
             loading: () => <p>A map is loading</p>,
-            ssr: false // This line is important. It's what prevents server-side render
+            ssr: false
         }
     )
 
@@ -57,7 +63,7 @@ const SaveForm = ({ setSubmitForm }) => {
             .required('Required'),
     });
 
-    function TextMaskCustom(props) {
+    const TextMaskCustom = (props) => {
         const { inputRef, ...other } = props;
 
         return (
@@ -66,23 +72,7 @@ const SaveForm = ({ setSubmitForm }) => {
                 ref={(ref) => {
                     inputRef(ref ? ref.inputElement : null);
                 }}
-                mask={[
-                    '(',
-                    /[1-9]/,
-                    /\d/,
-                    ')',
-                    ' ',
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                    '-',
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                ]}
+                mask={['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/,]}
                 placeholderChar={'\u2000'}
                 showMask
             />
@@ -101,12 +91,7 @@ const SaveForm = ({ setSubmitForm }) => {
             >
                 {({ submitForm, isSubmitting, touched, errors, values, setValues, setFieldValue }) => {
                     setSubmitForm(() => submitForm)
-
-                    useEffect(() => {
-                        if (empreendimentoAtual) {
-                            setValues({...values, ...empreendimentoAtual})
-                        }
-                    }, [empreendimentoAtual])
+                    setSetValues(() => setValues)
                     
                     return (
                         <Form id="cadastro-empreendimento">

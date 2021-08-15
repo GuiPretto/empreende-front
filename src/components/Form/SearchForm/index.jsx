@@ -58,7 +58,7 @@ const SearchForm = () => {
                             <Button size="large" disabled={loading} variant="contained" color="primary" onClick={submitForm}>Pesquisar<SearchOutlinedIcon/></Button>
                         </Grid>
                         <Grid item>
-                            <Link href={'/cadastro'}><Button type="button" size="large" variant="contained" color="primary"><a>Cadastrar Novo</a><AddOutlinedIcon/></Button></Link>
+                            <Link passHref href={'/cadastro'}><Button type="button" size="large" variant="contained" color="primary"><a>Cadastrar Novo</a><AddOutlinedIcon/></Button></Link>
                         </Grid>
                     </Grid>
                 </Form>

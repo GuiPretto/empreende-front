@@ -16,7 +16,7 @@ const Edicao = () => {
 
   useEffect(() => {
     id && dispatch(prepararEditarRequest(id, 'ID'))
-  }, [id])
+  }, [id, dispatch])
 
   return (
     <>

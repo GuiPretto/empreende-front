@@ -9,7 +9,7 @@ const PageHeader = ({children, title}) => {
         <Container style={{marginTop: '80px'}} maxWidth={'md'}>
             <Grid container wrap="nowrap" direction={'row'}>
                 <Grid container item justifyContent='flex-start' alignItems='center'>
-                    <Link href="/"><IconButton><ArrowBackIcon/></IconButton></Link>
+                    <Link passHref href="/"><IconButton><ArrowBackIcon/></IconButton></Link>
                     <Typography style={{marginLeft: '28px'}} variant='h5' component='h1'>{title}</Typography>
                 </Grid>
                 <Grid container item justifyContent='flex-end' alignItems='center' spacing={2}>
